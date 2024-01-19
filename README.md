@@ -2,8 +2,9 @@
 Step Project 1
 
  ## Descrition
- All services will automatically downloadded and installed, one that yopu must to do its change variables in file: /StepProject1/VM1/alertmanager.yml
- 
+ All services will automatically downloadded and installed, one that you must do it`s create file alertmanager.yml in directore /StepProject1/Vm1.
+ Example of alertmanager.yml is alertmanager-example.yml, just put your variables
+
 ## Services VM1
  - Grafana: host:33010
  - Prometheus: host:33020
