@@ -19,6 +19,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "mysql_exporter.service", destination: "/tmp/mysql_exporter.service"
   config.vm.provision "file", source: "node_exporter.service", destination: "/tmp/node_exporter.service"
 
-
+  #Download, install and cofigure all services 
   config.vm.provision "shell", path: "installation.sh"
 end

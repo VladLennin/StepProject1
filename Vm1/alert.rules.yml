@@ -1,37 +1,12 @@
-# groups:
-# - name: node_exporter_vm2
-#   rules:
-#   - alert: NodeCPUUsage
-#     expr: (100 - (irate(node_cpu{mode="idle", job="node_exporter_vm2"}[1m]) * 100)) > 20
-#     for: 15s
-#     labels:
-#       severity: page
-#     annotations:
-#       summary: High CPU usage detected CPU usage is above 20%
-
-
-
 groups: 
-- name: example 
+- name: High CPU usage 
   rules: 
   - alert: HighCpuUsage 
-    expr: 100 - (avg by(instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 10 
+    expr: 100 - (avg by(instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 20 
     for: 1m 
     labels: 
       severity: critical 
     annotations: 
-      description: "CPU usage is above 10%" 
+      description: "CPU usage is above 20%" 
       summary: "High CPU Usage"
-#   GNU nano 6.2                                                                              alert.rules.yml                                                                                       
-# groups:
-# - name: alert.rules
-#   rules:
-#   - alert: someTestAlert
-#     expr: disk_usage > 50
-#     for: 10s
-#     labels:
-#       severity: "critical"
-#     annotations:
-#       summary: "Hello my firts alert"
-#       description: "i have no idea"
-  
+

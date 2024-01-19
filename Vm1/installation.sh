@@ -36,11 +36,8 @@ sudo chown -R prometheus:prometheus /var/lib/prometheus
 cd ~/
 wget https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz
 tar xvzf alertmanager-0.26.0.linux-amd64.tar.gz
-
 sudo mv alertmanager-0.26.0.linux-amd64/alertmanager /usr/local/bin/
-
 sudo mkdir /etc/alertmanager/
-
 sudo mv alertmanager-0.26.0.linux-amd64/amtool /etc/alertmanager
 
 #Node Exporter

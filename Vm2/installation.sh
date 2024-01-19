@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#################################   MySql   #######################################
 
 MYSQL_ROOT_PASSWORD="12345678"
 
@@ -32,7 +33,7 @@ EOF
 # Check MySQL service status
 sudo systemctl status mysql.service
 
-##########################################################################################
+###################################   MySql Exporter   ########################################
 
 #Add Prometheus system user and group
 sudo groupadd --system prometheus
@@ -43,19 +44,6 @@ curl -s https://api.github.com/repos/prometheus/mysqld_exporter/releases/latest 
 tar xvf mysqld_exporter*.tar.gz
 sudo mv  mysqld_exporter-*.linux-amd64/mysqld_exporter /usr/local/bin/
 sudo chmod +x /usr/local/bin/mysqld_exporter
-
-# #Create Prometheus exporter database user
-# mysql -u root -p <<< $'\n'
-# CREATE USER 'mysqld_exporter'@'localhost' IDENTIFIED BY 'StrongPassword';
-# GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'mysqld_exporter'@'localhost';
-# FLUSH PRIVILEGES;
-# EXIT
-# mysql -u root -p <<EOF
-# CREATE USER 'mysqld_exporter'@'localhost' IDENTIFIED BY '12345678';
-# GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'mysqld_exporter'@'localhost';
-# FLUSH PRIVILEGES;
-# EXIT
-# EOF
 mysql -u root -p12345678 <<EOF
 CREATE USER 'mysqld_exporter'@'localhost' IDENTIFIED BY '12345678';
 GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'mysqld_exporter'@'localhost';
@@ -77,22 +65,17 @@ sudo systemctl daemon-reload
 sudo systemctl enable mysql_exporter
 sudo systemctl start mysql_exporter
 
-##########################################################################################
+####################################   Node Exporter   #######################################
 
 #Node Exporter installation
 cd ~/
-
 wget https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
 tar xvfz node_exporter-*.tar.gz
 sudo mv node_exporter-1.5.0.linux-amd64/node_exporter /usr/local/bin
 rm -r node_exporter-1.5.0.linux-amd64*
-
 sudo mv /tmp/node_exporter.service /etc/systemd/system/node_exporter.service
-
 sudo useradd -rs /bin/false node_exporter
-
 sudo systemctl enable node_exporter
-
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter
 
